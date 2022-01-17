@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,34 +24,28 @@ public class Produits implements Serializable {
    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "designation")
-    private String designation;
+    @Column(name = "id")
+    private Integer id;
     
     @Column(name = "nom")
     private String nom;
-  
+    
+    @Column(name = "description")
+    private String description;
+    
     @Column(name = "prix")
     private String prix;
     
+    @JoinColumn(name = "categorie_designation", referencedColumnName = "designation")
+    @ManyToOne(optional = false)
+    private Cathegorie categoriedesignation;
     public Produits(){
         
     }
-    public Produits(String designation) {
-        this.designation = designation;
-    }
     
-    public Produits(String designation, String nom, String prix) {
-        this.designation = designation;
+    public Produits(String nom, String prix) {
         this.nom = nom;
         this.prix = prix;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
     }
 
     public String getNom() {
@@ -67,6 +63,32 @@ public class Produits implements Serializable {
     public void setPrix(String prix) {
         this.prix = prix;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Cathegorie getCategoriedesignation() {
+        return categoriedesignation;
+    }
+
+    public void setCategoriedesignation(Cathegorie categoriedesignation) {
+        this.categoriedesignation = categoriedesignation;
+    }
+
+    
     
     
 }
