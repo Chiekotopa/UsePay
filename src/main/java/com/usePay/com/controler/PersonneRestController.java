@@ -5,9 +5,8 @@
  */
 package com.usePay.com.controler;
 
-import com.usePay.com.dao.CommercialRepository;
 import com.usePay.com.entities.Agence;
-import com.usePay.com.entities.Commercial;
+import com.usePay.com.entities.Personne;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +15,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.usePay.com.dao.PersonneRepository;
 
 /**
  *
  * @author chiek
  */
 @RestController
-@RequestMapping("/apiCommercial")
-public class CommercialRestController {
+@RequestMapping("/apiPersonne")
+public class PersonneRestController {
     
     @Autowired
-    CommercialRepository commercialRepository;
+    PersonneRepository commercialRepository;
     
-    @GetMapping(value = "getListCommercials")
-    public List<Commercial>getListCommercials(){
+    @GetMapping(value = "getListPersonne")
+    public List<Personne>getListCommercials(){
         
         return commercialRepository.findAll();
     }
     
-    @PostMapping(value = "saveCommercial")
-    public HashMap saveCommercial(@RequestBody Commercial commercial) {
+    @PostMapping(value = "savePersonne")
+    public HashMap saveCommercial(@RequestBody Personne commercial) {
         HashMap map = new HashMap();
         try {
 

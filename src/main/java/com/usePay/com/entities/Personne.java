@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.data.annotation.Persistent;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -25,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table
-public class Commercial {
+public class Personne  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +42,12 @@ public class Commercial {
     private String sexe;
     private String telephone;
     private String adresse;
+    private String status;
     @ManyToOne
     @JoinColumn(name = "idAgence")
     private Agence agence;
 
-    public Commercial() {
+    public Personne() {
     }
 
     public Integer getIdCommercial() {
@@ -135,6 +137,16 @@ public class Commercial {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
 
     public Agence getAgence() {
         return agence;

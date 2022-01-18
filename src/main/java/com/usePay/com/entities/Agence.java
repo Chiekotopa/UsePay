@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Agence {
+public class Agence  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
