@@ -5,12 +5,13 @@
  */
 package com.usePay.com.Services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.usePay.com.Dao.ProduitsRepository;
 import com.usePay.com.Entities.Produits;
-import java.io.IOException;
 import java.util.List;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +32,8 @@ public class ProduitService {
     
     //api qui permet d'enregistrer une liste de produits
     @RequestMapping(value = "/saveProduits", method = RequestMethod.POST)
-        public void saveEtape(@RequestBody List<Produits> produits) throws JsonProcessingException, IOException {
-        for (Produits prdt : produits) {
-        produitsRepository.save(prdt);
-        }
+    public void saveProduits(@RequestBody Produits produits) {
+       produitsRepository.save(produits);   
     }
     
     //api qui liste les produits 
