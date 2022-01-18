@@ -5,6 +5,8 @@
  */
 package com.usePay.com.controler;
 
+import com.usePay.com.dao.CompteRepository;
+import com.usePay.com.entities.Compte;
 import com.usePay.com.entities.Personne;
 import java.util.HashMap;
 import java.util.List;
@@ -14,31 +16,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.usePay.com.dao.PersonneRepository;
 
 /**
  *
  * @author chiek
  */
 @RestController
-@RequestMapping("/apiPersonne")
-public class PersonneRestController {
-    
+@RequestMapping("/apiCompte")
+public class CompteRestController {
+
     @Autowired
-    PersonneRepository commercialRepository;
+    CompteRepository compteRepository;
     
-    @GetMapping(value = "getListPersonne")
-    public List<Personne>getListCommercials(){
+      
+    @GetMapping(value = "getListCompte")
+    public List<Compte>getListCompte(){
         
-        return commercialRepository.findAll();
+        return compteRepository.findAll();
     }
     
     @PostMapping(value = "savePersonne")
-    public HashMap saveCommercial(@RequestBody Personne commercial) {
+    public HashMap saveCompte(@RequestBody Compte compte) {
         HashMap map = new HashMap();
         try {
 
-            commercialRepository.save(commercial);
+            compteRepository.save(compte);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
