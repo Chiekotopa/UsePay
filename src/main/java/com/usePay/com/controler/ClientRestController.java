@@ -93,7 +93,7 @@ public class ClientRestController {
 
     }
 
-    @GetMapping(value = "getListStoryClient")
+    @PostMapping(value = "getListStoryClient")
     public List<ClientStory> getListStoryClient(@RequestBody Client client) {   
         try {
             return clientStoryRepository.findStoryByIdClient(client.getIdClient());  
