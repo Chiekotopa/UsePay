@@ -26,9 +26,9 @@ import org.hibernate.annotations.GeneratorType;
 @Table
 public class Client {
 
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCommercial;
+    private Integer idClient;
     private String numero;
     private String nom;
     private String prenom;
@@ -41,21 +41,23 @@ public class Client {
     private String telephone;
     private String adresse;
     private String status;
-    private double solde;
-    private Integer numeroCompte;        
+    private Double solde;
+    private Integer numeroCompte;
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
     @ManyToOne
-    @JoinColumn(name = "idAgence", referencedColumnName ="idAgence" )
+    @JoinColumn(name = "idAgence", referencedColumnName = "idAgence")
     private Agence agence;
 
     public Client() {
     }
 
-    public Integer getIdCommercial() {
-        return idCommercial;
+    public Integer getIdClient() {
+        return idClient;
     }
 
-    public void setIdCommercial(Integer idCommercial) {
-        this.idCommercial = idCommercial;
+    public void setIdClient(Integer idClient) {
+        this.idClient = idClient;
     }
 
     public String getNumero() {
@@ -170,8 +172,13 @@ public class Client {
         this.agence = agence;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
    
-    
-    
-    
+
 }

@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.usePay.com.dao.ClientRepository;
+import com.usePay.com.dao.ClientStoryRepository;
+import com.usePay.com.entities.ClientStory;
+import java.util.Date;
 
 /**
  *
@@ -26,21 +29,31 @@ import com.usePay.com.dao.ClientRepository;
 public class ClientRestController {
 
     @Autowired
-    ClientRepository compteRepository;
-    
-      
+    ClientRepository clientRepository;
+
+    @Autowired
+    ClientStoryRepository clientStoryRepository;
+
     @GetMapping(value = "getListClient")
-    public List<Client>getListCompte(){
-        
-        return compteRepository.findAll();
+    public List<Client> getListCompte() {
+        try {
+             return clientRepository.findAll();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+       
     }
-    
+
     @PostMapping(value = "saveClient")
-    public HashMap saveCompte(@RequestBody Client client) {
+    public HashMap saveClient(@RequestBody Client client) {
         HashMap map = new HashMap();
         try {
 
-            compteRepository.save(client);
+            client.setCreationDate(new Date(System.currentTimeMillis()));
+            client.setSolde(0);
+            clientRepository.save(client);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
@@ -52,5 +65,42 @@ public class ClientRestController {
 
         }
 
+    }
+
+    @PostMapping(value = "creditClient")
+    public HashMap creditClient(@RequestBody Client client) {
+        HashMap map = new HashMap();
+        ClientStory clientStory = new ClientStory();
+        double sdeCredit = client.getSolde();
+        try {
+            Client c = clientRepository.getById(client.getIdClient());
+            client.setSolde(c.getSolde() + client.getSolde());
+            clientRepository.save(client);
+            clientStory.setClient(client);
+            clientStory.setTransactionDate(new Date(System.currentTimeMillis()));
+            clientStory.setTransactionSolde(sdeCredit);
+            clientStory.setTransactionType("Credit");
+            clientStoryRepository.save(clientStory);
+            map.put("status", "1");
+            map.put("message", "Success");
+            return map;
+        } catch (Exception e) {
+            map = new HashMap();
+            map.put("status", "0");
+            map.put("message", e.getMessage());
+            return map;
+
+        }
+
+    }
+
+    @GetMapping(value = "getListStoryClient")
+    public List<ClientStory> getListStoryClient(@RequestBody Client client) {   
+        try {
+            return clientStoryRepository.findStoryByIdClient(client.getIdClient());  
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }
