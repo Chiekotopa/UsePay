@@ -31,7 +31,6 @@ public class Commercial  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCommercial;
-    private String numero;
     private String nom;
     private String prenom;
     @Temporal(TemporalType.DATE)
@@ -44,6 +43,7 @@ public class Commercial  {
     private String adresse;
     private String status;
     private double solde;
+    @Column(length = 255, unique = true)
     private Integer numeroCompte;        
     @ManyToOne
     @JoinColumn(name = "idAgence", referencedColumnName ="idAgence" )
@@ -60,13 +60,7 @@ public class Commercial  {
         this.idCommercial = idCommercial;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+    
 
     public String getNom() {
         return nom;

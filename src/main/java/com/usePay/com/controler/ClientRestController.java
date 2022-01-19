@@ -6,7 +6,6 @@
 package com.usePay.com.controler;
 
 import com.usePay.com.entities.Client;
-import com.usePay.com.entities.Commercial;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

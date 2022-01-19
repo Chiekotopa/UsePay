@@ -6,17 +6,16 @@
 package com.usePay.com.entities;
 
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.annotations.GeneratorType;
 
 /**
  *
@@ -29,7 +28,6 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idClient;
-    private String numero;
     private String nom;
     private String prenom;
     @Temporal(TemporalType.DATE)
@@ -42,8 +40,9 @@ public class Client {
     private String adresse;
     private String status;
     private Double solde;
+    @Column(length = 255, unique = true)
     private Integer numeroCompte;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @ManyToOne
     @JoinColumn(name = "idAgence", referencedColumnName = "idAgence")
@@ -58,14 +57,6 @@ public class Client {
 
     public void setIdClient(Integer idClient) {
         this.idClient = idClient;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
     }
 
     public String getNom() {
