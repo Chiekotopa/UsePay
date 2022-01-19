@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table
-public class Personne  {
+public class Commercial  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,11 +43,13 @@ public class Personne  {
     private String telephone;
     private String adresse;
     private String status;
+    private double solde;
+    private Integer numeroCompte;        
     @ManyToOne
-    @JoinColumn(name = "idAgence")
+    @JoinColumn(name = "idAgence", referencedColumnName ="idAgence" )
     private Agence agence;
 
-    public Personne() {
+    public Commercial() {
     }
 
     public Integer getIdCommercial() {
@@ -155,5 +157,23 @@ public class Personne  {
     public void setAgence(Agence agence) {
         this.agence = agence;
     }
+
+    public double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(double solde) {
+        this.solde = solde;
+    }
+
+    public Integer getNumeroCompte() {
+        return numeroCompte;
+    }
+
+    public void setNumeroCompte(Integer numeroCompte) {
+        this.numeroCompte = numeroCompte;
+    }
+    
+    
 
 }

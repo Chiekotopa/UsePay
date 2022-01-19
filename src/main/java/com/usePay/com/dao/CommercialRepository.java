@@ -5,13 +5,13 @@
  */
 package com.usePay.com.dao;
 
-import com.usePay.com.entities.Compte;
+import com.usePay.com.entities.Commercial;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author chiek
  */
-public interface CompteRepository extends JpaRepository<Compte, Integer> {
+public interface CommercialRepository extends JpaRepository<Commercial, Integer> {
     
 }

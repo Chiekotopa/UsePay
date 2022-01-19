@@ -5,13 +5,13 @@
  */
 package com.usePay.com.dao;
 
-import com.usePay.com.entities.Personne;
+import com.usePay.com.entities.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author chiek
  */
-public interface PersonneRepository extends JpaRepository<Personne, Integer> {
+public interface ClientRepository extends JpaRepository<Client, Integer> {
     
 }

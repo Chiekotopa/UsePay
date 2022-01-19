@@ -24,7 +24,7 @@ public class Agence  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAgence;
-   private  String numero;
+    private  String numero;
     private String nom;
     private String adresse;
     private String ville;
