@@ -5,53 +5,56 @@
  */
 package com.usePay.com.controler;
 
-import com.usePay.com.entities.Commercial;
+import com.usePay.com.dao.SouscriptionRepository;
+import com.usePay.com.entities.Souscription;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.usePay.com.dao.CommercialRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
  * @author chiek
  */
 @RestController
-@RequestMapping("/apiPersonne")
+@RequestMapping("/apiSouscription")
 @CrossOrigin(origins = "*")
+public class SouscriptionController {
 
-public class CommercialRestController {
-    
     @Autowired
-    CommercialRepository commercialRepository;
-    
-    @GetMapping(value = "getListPersonne")
-    public List<Commercial>getListCommercials(){
-        
-        return commercialRepository.findAll();
+    SouscriptionRepository souscriptionRepository;
+
+    @GetMapping("getSubscriptionList")
+    public List<Souscription> getSubscriptionList() {
+
+        try {
+            return souscriptionRepository.findAll();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
+
     
-    @PostMapping(value = "savePersonne")
-    public HashMap saveCommercial(@RequestBody Commercial commercial) {
+    @PostMapping("saveSouscription")
+    public HashMap saveSouscription(@RequestBody Souscription souscription) {
         HashMap map = new HashMap();
         try {
-
-            commercialRepository.save(commercial);
+            souscriptionRepository.save(souscription);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
         } catch (Exception e) {
-            map = new HashMap();
+             map = new HashMap();
             map.put("status", "0");
             map.put("message", e.getMessage());
             return map;
-
         }
-
     }
+
 }

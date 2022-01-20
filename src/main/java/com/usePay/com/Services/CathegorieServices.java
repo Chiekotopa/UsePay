@@ -5,7 +5,7 @@
  */
 package com.usePay.com.Services;
 
-import com.usePay.com.Entities.Cathegorie;
+import com.usePay.com.Entities.Categorie;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,12 +28,12 @@ public class CathegorieServices {
     CathegorieRepository cathegorierepository;
   
     @RequestMapping(value = "/getTypesProduits", method = RequestMethod.GET)
-    public  List<Cathegorie>getListTypesProduits(){
+    public  List<Categorie>getListTypesProduits(){
         return cathegorierepository.findAll(); 
     }
     
     @RequestMapping(value = "/deleteTypesProduits", method = RequestMethod.POST)
-        public void deleteActualite(@RequestBody Cathegorie typesproduits ) {
+        public void deleteActualite(@RequestBody Categorie typesproduits ) {
         cathegorierepository.delete(typesproduits);
        
     }

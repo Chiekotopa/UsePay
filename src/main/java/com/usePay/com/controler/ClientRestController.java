@@ -18,6 +18,7 @@ import com.usePay.com.dao.ClientRepository;
 import com.usePay.com.dao.ClientStoryRepository;
 import com.usePay.com.entities.ClientStory;
 import java.util.Date;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
@@ -25,6 +26,7 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("/apiClient")
+@CrossOrigin(origins = "*")
 public class ClientRestController {
 
     @Autowired
@@ -41,7 +43,6 @@ public class ClientRestController {
             System.out.println(e.getMessage());
             return null;
         }
-
        
     }
 
@@ -61,7 +62,6 @@ public class ClientRestController {
             map.put("status", "0");
             map.put("message", e.getMessage());
             return map;
-
         }
 
     }
