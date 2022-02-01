@@ -23,28 +23,30 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class ClientStory {
+public class UsersStory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idclientStory;
+    private Integer idUserStory;
     @Temporal(TemporalType.TIMESTAMP)
     private Date transactionDate;
     private String transactionType;
-    private double transactionSolde;
+    private double transactionBalance;
+    private double oldBalance;
+    private double newBalance;
     @ManyToOne
-    @JoinColumn(name = "idClient", referencedColumnName = "idClient")
-    private Client client;
+    @JoinColumn(name = "user", referencedColumnName = "username")
+    private User user;
 
-    public ClientStory() {
+    public UsersStory() {
     }
 
     public Integer getIdclientStory() {
-        return idclientStory;
+        return idUserStory;
     }
 
-    public void setIdclientStory(Integer idclientStory) {
-        this.idclientStory = idclientStory;
+    public void setIdclientStory(Integer idUserStory) {
+        this.idUserStory = idUserStory;
     }
 
     public Date getTransactionDate() {
@@ -63,20 +65,37 @@ public class ClientStory {
         this.transactionType = transactionType;
     }
 
-    public double getTransactionSolde() {
-        return transactionSolde;
+    public double getTransactionBalance() {
+        return transactionBalance;
     }
 
-    public void setTransactionSolde(double transactionSolde) {
-        this.transactionSolde = transactionSolde;
+    public void setTransactionBalance(double transactionBalance) {
+        this.transactionBalance = transactionBalance;
     }
 
-    public Client getClient() {
-        return client;
+    public double getOldBalance() {
+        return oldBalance;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setOldBalance(double oldBalance) {
+        this.oldBalance = oldBalance;
+    }
+
+    public double getNewBalance() {
+        return newBalance;
+    }
+
+    public void setNewBalance(double newBalance) {
+        this.newBalance = newBalance;
+    }
+
+    
+    public User getClient() {
+        return user;
+    }
+
+    public void setClient(User user) {
+        this.user = user;
     }
     
     

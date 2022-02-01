@@ -5,7 +5,7 @@
  */
 package com.usePay.com.controler;
 
-import com.usePay.com.entities.Client;
+import com.usePay.com.entities.User;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.usePay.com.dao.ClientRepository;
-import com.usePay.com.dao.ClientStoryRepository;
-import com.usePay.com.entities.ClientStory;
+import com.usePay.com.entities.UsersStory;
 import java.util.Date;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import com.usePay.com.dao.UserRepository;
+import com.usePay.com.dao.UserStoryRepository;
 
 /**
  *
@@ -27,18 +27,29 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/apiClient")
 @CrossOrigin(origins = "*")
-public class ClientRestController {
+public class UserRestController {
 
     @Autowired
-    ClientRepository clientRepository;
+    UserRepository userRepository;
 
     @Autowired
-    ClientStoryRepository clientStoryRepository;
+    UserStoryRepository userStoryRepository;
 
-    @GetMapping(value = "getListClient")
-    public List<Client> getListCompte() {
+    @GetMapping(value = "getListUserClient")
+    public List<User> getListCompteClient() {
         try {
-             return clientRepository.findAll();
+             return userRepository.findListClients();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+       
+    }
+    
+     @GetMapping(value = "getListUserCommercial")
+    public List<User> getListCompteCommercial() {
+        try {
+             return userRepository.findListCommercial();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
@@ -46,14 +57,14 @@ public class ClientRestController {
        
     }
 
-    @PostMapping(value = "saveClient")
-    public HashMap saveClient(@RequestBody Client client) {
+    @PostMapping(value = "saveUser")
+    public HashMap saveClient(@RequestBody User user) {
         HashMap map = new HashMap();
         try {
 
-            client.setCreationDate(new Date(System.currentTimeMillis()));
-            client.setSolde(0);
-            clientRepository.save(client);
+            user.setCreationDate(new Date(System.currentTimeMillis()));
+            user.setSolde(0);
+            userRepository.save(user);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
@@ -66,20 +77,22 @@ public class ClientRestController {
 
     }
 
-    @PostMapping(value = "creditClient")
-    public HashMap creditClient(@RequestBody Client client) {
+    @PostMapping(value = "creditUSer")
+    public HashMap creditClient(@RequestBody User user) {
         HashMap map = new HashMap();
-        ClientStory clientStory = new ClientStory();
-        double sdeCredit = client.getSolde();
+        UsersStory usersStory = new UsersStory();
+        double sdeCredit = user.getSolde();
         try {
-            Client c = clientRepository.getById(client.getIdClient());
-            client.setSolde(c.getSolde() + client.getSolde());
-            clientRepository.save(client);
-            clientStory.setClient(client);
-            clientStory.setTransactionDate(new Date(System.currentTimeMillis()));
-            clientStory.setTransactionSolde(sdeCredit);
-            clientStory.setTransactionType("Credit");
-            clientStoryRepository.save(clientStory);
+            User c = userRepository.getById(user.getUserName());
+            user.setSolde(c.getSolde() + user.getSolde());
+            userRepository.save(user);
+            usersStory.setClient(user);
+            usersStory.setTransactionDate(new Date(System.currentTimeMillis()));
+            usersStory.setTransactionBalance(sdeCredit);
+            usersStory.setTransactionType("Credit");
+            usersStory.setOldBalance(c.getSolde());
+            usersStory.setNewBalance(user.getSolde());
+            userStoryRepository.save(usersStory);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
@@ -94,9 +107,9 @@ public class ClientRestController {
     }
 
     @PostMapping(value = "getListStoryClient")
-    public List<ClientStory> getListStoryClient(@RequestBody Client client) {   
+    public List<UsersStory> getListStoryClient(@RequestBody User user) {   
         try {
-            return clientStoryRepository.findStoryByIdClient(client.getIdClient());  
+            return userStoryRepository.findStoryByIduser(user.getUserName());  
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;

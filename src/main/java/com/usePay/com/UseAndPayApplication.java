@@ -8,6 +8,8 @@ public class UseAndPayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UseAndPayApplication.class, args);
+                
+                System.out.println("");
 	}
 
 }

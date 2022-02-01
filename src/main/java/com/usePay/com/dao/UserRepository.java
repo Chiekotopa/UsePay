@@ -5,22 +5,19 @@
  */
 package com.usePay.com.dao;
 
-import com.usePay.com.entities.ClientStory;
+import com.usePay.com.entities.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
-
 
 /**
  *
  * @author chiek
  */
-public interface ClientStoryRepository extends JpaRepository<ClientStory, Integer> {
-
-    @Query(value ="SELECT cs FROM ClientStory cs WHERE cs.client.idClient=:idclient")
-    public List<ClientStory>findStoryByIdClient(@Param(value = "idclient")int idclient);
-
+public interface UserRepository extends JpaRepository<User, String> {
+    @Query(value ="SELECT u FROM User u WHERE u.TypeUser=client")
+    public List<User>findListClients();
     
-
+     @Query(value ="SELECT u FROM User u WHERE u.TypeUser=commercial")
+    public List<User>findListCommercial();
 }

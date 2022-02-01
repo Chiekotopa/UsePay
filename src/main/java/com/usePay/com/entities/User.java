@@ -5,13 +5,14 @@
  */
 package com.usePay.com.entities;
 
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,11 +24,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class Client {
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idClient;
+    private String username;
+    private String password;
+    @ManyToMany
+    @JoinTable(name="USERS_ROLE")
+    private Collection<Role>roles;
     private String nom;
     private String prenom;
     @Temporal(TemporalType.DATE)
@@ -47,18 +51,14 @@ public class Client {
     @ManyToOne
     @JoinColumn(name = "idAgence", referencedColumnName = "idAgence")
     private Agence agence;
-
-    public Client() {
+    private String TypeUser;
+    @ManyToOne
+    @JoinColumn(name="users", referencedColumnName = "username")
+    private User user;
+    
+    public User() {
     }
-
-    public Integer getIdClient() {
-        return idClient;
-    }
-
-    public void setIdClient(Integer idClient) {
-        this.idClient = idClient;
-    }
-
+    
     public String getNom() {
         return nom;
     }
@@ -169,6 +169,46 @@ public class Client {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+    
+    public String getUserName(){
+        return username;
+    }
+    
+    public void setUserName(String username){
+        this.username=username;
+    }
+    
+     public String getPassword(){
+        return password;
+    }
+    
+    public void setPassword(String password){
+        this.password=password;
+    }
+    
+     public String getTypeUser(){
+        return TypeUser;
+    }
+    
+    public void setTypeUser(String typeUser){
+        this.TypeUser=typeUser;
+    }
+    
+     public User getUser(){
+        return user;
+    }
+    
+    public void setUser(User user){
+        this.user=user;
+    }
+    
+    public Collection<Role> getRoles(){
+        return roles;
+    }
+    
+    public void setRoles(Collection<Role>roles){
+        this.roles=roles;
     }
    
 

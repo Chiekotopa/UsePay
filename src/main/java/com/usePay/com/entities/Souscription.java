@@ -43,8 +43,8 @@ public class Souscription {
     @JoinColumn(name = "idProduit",referencedColumnName = "idProduit")
     private Produits produits;
     @ManyToOne
-    @JoinColumn(name = "idClient",referencedColumnName = "idClient")
-    private Client Client;
+    @JoinColumn(name = "user",referencedColumnName = "username")
+    private User user;
     
 
     public Souscription() {
@@ -114,12 +114,12 @@ public class Souscription {
         this.produits = produits;
     }
 
-    public Client getClient() {
-        return Client;
+    public User getUser() {
+        return user;
     }
 
-    public void setClient(Client Client) {
-        this.Client = Client;
+    public void setUser(User user) {
+        this.user = user;
     }
     
     
