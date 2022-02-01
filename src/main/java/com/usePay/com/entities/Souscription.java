@@ -6,6 +6,7 @@
 package com.usePay.com.entities;
 
 import com.usePay.com.Entities.Produits;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class Souscription {
+public class Souscription implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

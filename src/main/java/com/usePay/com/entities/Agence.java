@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Agence  {
+public class Agence implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

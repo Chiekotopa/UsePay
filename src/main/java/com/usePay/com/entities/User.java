@@ -5,6 +5,7 @@
  */
 package com.usePay.com.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class User {
+public class User implements Serializable{
 
     @Id
     private String username;
@@ -52,9 +53,7 @@ public class User {
     @JoinColumn(name = "idAgence", referencedColumnName = "idAgence")
     private Agence agence;
     private String TypeUser;
-    @ManyToOne
-    @JoinColumn(name="users", referencedColumnName = "username")
-    private User user;
+    private String userCreator;
     
     public User() {
     }
@@ -195,12 +194,12 @@ public class User {
         this.TypeUser=typeUser;
     }
     
-     public User getUser(){
-        return user;
+     public String getUser(){
+        return userCreator;
     }
     
-    public void setUser(User user){
-        this.user=user;
+    public void setUser(String user){
+        this.userCreator=user;
     }
     
     public Collection<Role> getRoles(){

@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class UsersStory {
+public class UsersStory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,7 +98,5 @@ public class UsersStory {
         this.user = user;
     }
     
-    
-    
-    
+
 }
