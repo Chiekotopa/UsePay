@@ -14,7 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -22,13 +25,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "produits")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Produits.findAll", query = "SELECT p FROM Produits p"),
+    @NamedQuery(name = "Produits.findById", query = "SELECT p FROM Produits p WHERE p.idProduit = :idProduit")})
 public class Produits implements Serializable {
    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "idProduit")
+    private Integer idProduit;
     
     @Column(name = "nom")
     private String nom;
@@ -41,7 +48,7 @@ public class Produits implements Serializable {
     
     @JoinColumn(name = "categorie_designation", referencedColumnName = "designation")
     @ManyToOne(optional = false)
-    private Cathegorie categoriedesignation;
+        private Categorie categoriedesignation;
     public Produits(){
         
     }
@@ -67,14 +74,15 @@ public class Produits implements Serializable {
         this.prix = prix;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdProduit() {
+        return idProduit;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdProduit(Integer idProduit) {
+        this.idProduit = idProduit;
     }
 
+   
     public String getDescription() {
         return description;
     }
@@ -83,11 +91,11 @@ public class Produits implements Serializable {
         this.description = description;
     }
 
-    public Cathegorie getCategoriedesignation() {
+    public Categorie getCategoriedesignation() {
         return categoriedesignation;
     }
 
-    public void setCategoriedesignation(Cathegorie categoriedesignation) {
+    public void setCategoriedesignation(Categorie categoriedesignation) {
         this.categoriedesignation = categoriedesignation;
     }
 

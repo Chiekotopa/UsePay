@@ -22,21 +22,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author chiek
  */
 @RestController
-@RequestMapping("/apiAgent")
+@RequestMapping("/apiAgence")
 @CrossOrigin(origins = "*")
 public class AgenceRestController {
 
     @Autowired
     AgenceRepository agenceRepository;
 
-    @GetMapping(value = "getlistAgents")
+    @GetMapping(value = "getlistAgences")
     public List<Agence> getlistAgents() {
 
         return agenceRepository.findAll();
 
     }
 
-    @PostMapping(value = "saveAgent")
+    @PostMapping(value = "saveAgence")
     public HashMap saveAgent(@RequestBody Agence agence) {
         HashMap map = new HashMap();
         try {

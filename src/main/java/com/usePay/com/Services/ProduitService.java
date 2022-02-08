@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -31,6 +31,7 @@ public class ProduitService {
     ProduitsRepository produitsRepository;
     
     //api qui permet d'enregistrer une liste de produits
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/saveProduits", method = RequestMethod.POST)
     public void saveProduits(@RequestBody Produits produits) {
        produitsRepository.save(produits);   

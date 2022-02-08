@@ -5,13 +5,13 @@
  */
 package com.usePay.com.Dao;
 
-import com.usePay.com.Entities.Cathegorie;
+import com.usePay.com.Entities.Categorie;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author MIKE
  */
-public interface CathegorieRepository extends JpaRepository<Cathegorie, String> {
+public interface CathegorieRepository extends JpaRepository<Categorie, String> {
     
 }

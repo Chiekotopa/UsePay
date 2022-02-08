@@ -57,13 +57,34 @@ public class UserRestController {
        
     }
 
-    @PostMapping(value = "saveUser")
+    @PostMapping(value = "saveCommercial")
+    public HashMap saveCommercial(@RequestBody User user) {
+        HashMap map = new HashMap();
+        try {
+            user.setCreationDate(new Date(System.currentTimeMillis()));
+            user.setSolde(0);
+            user.setTypeUser("commercial");
+            userRepository.save(user);
+            map.put("status", "1");
+            map.put("message", "Success");
+            return map;
+        } catch (Exception e) {
+            map = new HashMap();
+            map.put("status", "0");
+            map.put("message", e.getMessage());
+            return map;
+        }
+
+    }
+    
+    
+    @PostMapping(value = "saveClient")
     public HashMap saveClient(@RequestBody User user) {
         HashMap map = new HashMap();
         try {
-
             user.setCreationDate(new Date(System.currentTimeMillis()));
             user.setSolde(0);
+            user.setTypeUser("client");
             userRepository.save(user);
             map.put("status", "1");
             map.put("message", "Success");
