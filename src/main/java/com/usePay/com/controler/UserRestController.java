@@ -25,7 +25,7 @@ import com.usePay.com.dao.UserStoryRepository;
  * @author chiek
  */
 @RestController
-@RequestMapping("/apiClient")
+@RequestMapping("/apiUser")
 @CrossOrigin(origins = "*")
 public class UserRestController {
 
@@ -63,7 +63,7 @@ public class UserRestController {
         try {
             user.setCreationDate(new Date(System.currentTimeMillis()));
             user.setSolde(0);
-            user.setTypeUser("commercial");
+            user.setTypeUser("Commercial");
             userRepository.save(user);
             map.put("status", "1");
             map.put("message", "Success");
@@ -84,7 +84,7 @@ public class UserRestController {
         try {
             user.setCreationDate(new Date(System.currentTimeMillis()));
             user.setSolde(0);
-            user.setTypeUser("client");
+            user.setTypeUser("Client");
             userRepository.save(user);
             map.put("status", "1");
             map.put("message", "Success");
