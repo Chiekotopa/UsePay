@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.usePay.com.Services;
+package com.usePay.com.controler;
 
 import com.usePay.com.Entities.Categorie;
 import java.util.List;
@@ -22,7 +22,7 @@ import com.usePay.com.Dao.CathegorieRepository;
 @RestController
 @RequestMapping("")
 @CrossOrigin(origins = "*")
-public class CathegorieServices {
+public class CathegorieControler {
     
      @Autowired
     CathegorieRepository cathegorierepository;

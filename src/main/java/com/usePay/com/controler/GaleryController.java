@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.usePay.com.Services;
+package com.usePay.com.controler;
 
-import com.usePay.com.Dao.TauxPremierVersementRepository;
-import com.usePay.com.entities.TauxPremierVerssement;
+import com.usePay.com.Dao.GaleryRepository;
+import com.usePay.com.entities.Galery;
+import com.usePay.com.entities.PeriodeVerssement;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,22 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author Chieko Topa
+ * @author chiek
  */
 @RestController
-@RequestMapping("/apiTauxVersement")
+@RequestMapping("/apiGalery")
 @CrossOrigin(origins = "*")
-public class TauxPremierVersementRestController {
+public class GaleryController {
     
-    @Autowired 
-    TauxPremierVersementRepository versementRepository;
+    @Autowired
+    GaleryRepository galeryRepository;
     
-     @PostMapping(value = "SaveTauxVersement")
-    public Object SavePeriode(@RequestBody TauxPremierVerssement premierVerssement){
+     @PostMapping(value = "saveGalery")
+    public Object SaveGalery(@RequestBody Galery galery){
         HashMap map=new HashMap();
         
         try {
-            versementRepository.save(premierVerssement);
+            galeryRepository.save(galery);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
@@ -45,4 +46,22 @@ public class TauxPremierVersementRestController {
         }
     }
     
+    
+    @PostMapping(value = "deleteGalery")
+    public Object SavePeriode(@RequestBody Galery galery){
+        HashMap map=new HashMap();
+        
+        try {
+            galeryRepository.delete(galery);
+            map.put("status", "1");
+            map.put("message", "Success");
+            return map;
+            
+        } catch (Exception e) {
+           
+            map.put("status", "0");
+            map.put("message", e.getMessage());
+            return map;
+        }
+    }
 }
