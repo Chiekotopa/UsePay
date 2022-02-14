@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.usePay.com.dao;
+package com.usePay.com.Dao;
 
-import com.usePay.com.entities.Agence;
+import com.usePay.com.entities.PeriodeVerssement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author chiek
+ * @author Chieko Topa
  */
-public interface AgenceRepository extends JpaRepository<Agence, Integer> {
+public interface PeriodeVerssementRepository extends JpaRepository<PeriodeVerssement, Integer> {
     
 }

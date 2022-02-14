@@ -5,7 +5,7 @@
  */
 package com.usePay.com.controler;
 
-import com.usePay.com.Services.PeriodeVerssementRepository;
+import com.usePay.com.Dao.PeriodeVerssementRepository;
 import com.usePay.com.entities.PeriodeVerssement;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
