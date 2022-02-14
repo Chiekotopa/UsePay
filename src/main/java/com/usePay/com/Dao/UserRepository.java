@@ -15,9 +15,9 @@ import org.springframework.data.jpa.repository.Query;
  * @author chiek
  */
 public interface UserRepository extends JpaRepository<User, String> {
-    @Query(value ="SELECT u FROM User u WHERE u.TypeUser=client")
+    @Query(value ="SELECT u FROM User u WHERE u.TypeUser='Client'")
     public List<User>findListClients();
     
-     @Query(value ="SELECT u FROM User u WHERE u.TypeUser=commercial")
+     @Query(value ="SELECT u FROM User u WHERE u.TypeUser='Commercial'")
     public List<User>findListCommercial();
 }
