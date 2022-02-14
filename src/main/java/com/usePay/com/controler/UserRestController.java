@@ -19,6 +19,7 @@ import java.util.Date;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.usePay.com.dao.UserRepository;
 import com.usePay.com.dao.UserStoryRepository;
+import java.util.ArrayList;
 
 /**
  *
@@ -56,13 +57,14 @@ public class UserRestController {
         }
        
     }
-
+  
     @PostMapping(value = "saveCommercial")
     public HashMap saveCommercial(@RequestBody User user) {
         HashMap map = new HashMap();
         try {
+            System.out.println(user.getUsername());
             user.setCreationDate(new Date(System.currentTimeMillis()));
-            user.setSolde(0);
+            user.setSolde(0.0);
             user.setTypeUser("Commercial");
             userRepository.save(user);
             map.put("status", "1");
@@ -72,18 +74,19 @@ public class UserRestController {
             map = new HashMap();
             map.put("status", "0");
             map.put("message", e.getMessage());
+            System.out.println(map);
             return map;
         }
 
     }
-    
-    
+   
+  
     @PostMapping(value = "saveClient")
-    public HashMap saveClient(@RequestBody User user) {
+    public Object saveClient(@RequestBody User user) {
         HashMap map = new HashMap();
         try {
             user.setCreationDate(new Date(System.currentTimeMillis()));
-            user.setSolde(0);
+            user.setSolde(0.0);
             user.setTypeUser("Client");
             userRepository.save(user);
             map.put("status", "1");
@@ -99,12 +102,13 @@ public class UserRestController {
     }
 
     @PostMapping(value = "creditUSer")
-    public HashMap creditClient(@RequestBody User user) {
+    public Object creditClient(@RequestBody User user) {
         HashMap map = new HashMap();
         UsersStory usersStory = new UsersStory();
+        User u=new User();
         double sdeCredit = user.getSolde();
         try {
-            User c = userRepository.getById(user.getUserName());
+            User c = userRepository.getById(user.getUsername());
             user.setSolde(c.getSolde() + user.getSolde());
             userRepository.save(user);
             usersStory.setClient(user);
@@ -129,8 +133,10 @@ public class UserRestController {
 
     @PostMapping(value = "getListStoryClient")
     public List<UsersStory> getListStoryClient(@RequestBody User user) {   
+        List<UsersStory> usersStorys=new ArrayList<>();
         try {
-            return userStoryRepository.findStoryByIduser(user.getUserName());  
+            usersStorys=userStoryRepository.findStoryByIduser(user.getUsername());
+            return   usersStorys;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;

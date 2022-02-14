@@ -8,6 +8,7 @@ package com.usePay.com.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,31 +29,49 @@ import javax.persistence.TemporalType;
 public class User implements Serializable{
 
     @Id
+    @Basic(optional = false)
+    @Column(name = "username")
     private String username;
+    
+    @Column(name = "password")
     private String password;
     @ManyToMany
     @JoinTable(name="USERS_ROLE")
     private Collection<Role>roles;
+    
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "prenom")
     private String prenom;
+    @Column(name = "DateNaiss")
     @Temporal(TemporalType.DATE)
     private Date DateNaiss;
+    @Column(name = "lieuNaiss")
     private String lieuNaiss;
+    @Column(name = "cni")
     private String cni;
+    @Column(name = "nationalite")
     private String nationalite;
+    @Column(name = "sexe")
     private String sexe;
+    @Column(name = "telephone")
     private String telephone;
+    @Column(name = "adresse")
     private String adresse;
+    @Column(name = "status")
     private String status;
+    @Column(name = "solde")
     private Double solde;
-    @Column(length = 255, unique = true)
+    @Column(length = 255, unique = true, name = "numeroCompte")
     private Integer numeroCompte;
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @ManyToOne
     @JoinColumn(name = "idAgence", referencedColumnName = "idAgence")
     private Agence agence;
+    @Column(name = "TypeUser")
     private String TypeUser;
+    @Column(name = "userCreator")
     private String userCreator;
     
     public User() {
@@ -138,13 +157,7 @@ public class User implements Serializable{
         this.status = status;
     }
 
-    public double getSolde() {
-        return solde;
-    }
-
-    public void setSolde(double solde) {
-        this.solde = solde;
-    }
+   
 
     public Integer getNumeroCompte() {
         return numeroCompte;
@@ -170,13 +183,7 @@ public class User implements Serializable{
         this.creationDate = creationDate;
     }
     
-    public String getUserName(){
-        return username;
-    }
-    
-    public void setUserName(String username){
-        this.username=username;
-    }
+   
     
      public String getPassword(){
         return password;
@@ -193,14 +200,32 @@ public class User implements Serializable{
     public void setTypeUser(String typeUser){
         this.TypeUser=typeUser;
     }
-    
-     public String getUser(){
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(Double solde) {
+        this.solde = solde;
+    }
+
+    public String getUserCreator() {
         return userCreator;
     }
-    
-    public void setUser(String user){
-        this.userCreator=user;
+
+    public void setUserCreator(String userCreator) {
+        this.userCreator = userCreator;
     }
+    
+    
     
     public Collection<Role> getRoles(){
         return roles;

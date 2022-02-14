@@ -40,6 +40,8 @@ public class Souscription implements Serializable{
     private Date duree;
     private double montantJour;
     private double tauxPenalite;
+    private double montantDet;
+    private double versement;
     @ManyToOne
     @JoinColumn(name = "idProduit",referencedColumnName = "idProduit")
     private Produits produits;
@@ -49,6 +51,22 @@ public class Souscription implements Serializable{
     
 
     public Souscription() {
+    }
+
+    public double getMontantDet() {
+        return montantDet;
+    }
+
+    public void setMontantDet(double montantDet) {
+        this.montantDet = montantDet;
+    }
+
+    public double getVersement() {
+        return versement;
+    }
+
+    public void setVersement(double versement) {
+        this.versement = versement;
     }
 
     public Integer getIdSouscription() {

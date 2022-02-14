@@ -33,13 +33,15 @@ public class Agence implements Serializable {
     public Agence() {
     }
 
-    public Integer getId() {
+    public int getIdAgence() {
         return idAgence;
     }
 
-    public void setId(Integer id) {
-        this.idAgence = id;
+    public void setIdAgence(int idAgence) {
+        this.idAgence = idAgence;
     }
+
+   
 
     public String getNumero() {
         return numero;

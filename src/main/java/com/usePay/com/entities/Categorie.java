@@ -5,11 +5,14 @@
  */
 package com.usePay.com.Entities;
 
+import com.usePay.com.entities.PeriodeVerssement;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +27,18 @@ public class Categorie implements Serializable {
     @Basic(optional = false)
     @Column(name = "designation")
     private String designation;
+    
+    @JoinColumn(name = "periode", referencedColumnName = "idPeriode")
+    @ManyToOne(optional = false)
+    private PeriodeVerssement periodeVerssement;
+
+    public PeriodeVerssement getPeriodeVerssement() {
+        return periodeVerssement;
+    }
+
+    public void setPeriodeVerssement(PeriodeVerssement periodeVerssement) {
+        this.periodeVerssement = periodeVerssement;
+    }
 
     public Categorie() {
     }
@@ -32,13 +47,14 @@ public class Categorie implements Serializable {
         this.designation = designation;
     }
 
-    public String getCodeProduits() {
+    public String getDesignation() {
         return designation;
     }
 
-    public void setCodeProduits(String designation) {
+    public void setDesignation(String designation) {
         this.designation = designation;
     }
+    
 
     @Override
     public String toString() {
