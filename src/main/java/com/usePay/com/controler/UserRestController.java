@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.usePay.com.entities.UsersStory;
 import java.util.Date;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import com.usePay.com.dao.UserRepository;
-import com.usePay.com.dao.UserStoryRepository;
 import java.util.ArrayList;
+import com.usePay.com.dao.UserRepostory;
+import com.usePay.com.dao.UserStoryRepostory;
 
 /**
  *
@@ -31,10 +31,10 @@ import java.util.ArrayList;
 public class UserRestController {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepostory userRepository;
 
     @Autowired
-    UserStoryRepository userStoryRepository;
+    UserStoryRepostory userStoryRepository;
 
     @GetMapping(value = "getListUserClient")
     public List<User> getListCompteClient() {

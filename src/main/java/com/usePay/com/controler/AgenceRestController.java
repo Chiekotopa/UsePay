@@ -5,7 +5,6 @@
  */
 package com.usePay.com.controler;
 
-import com.usePay.com.dao.AgenceRepository;
 import com.usePay.com.entities.Agence;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.usePay.com.dao.AgenceRepostory;
 
 /**
  *
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AgenceRestController {
 
     @Autowired
-    AgenceRepository agenceRepository;
+    AgenceRepostory agenceRepository;
 
     @GetMapping(value = "getlistAgences")
     public List<Agence> getlistAgents() {
