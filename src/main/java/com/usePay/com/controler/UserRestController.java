@@ -5,6 +5,7 @@
  */
 package com.usePay.com.controler;
 
+import com.usePay.com.Dao.ClientStoryRepository;
 import com.usePay.com.entities.User;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +36,10 @@ public class UserRestController {
     UserRepostory userRepository;
 
     @Autowired
-    CommercialStoryRepostory userStoryRepository;
+    CommercialStoryRepostory commercialStoryRepostory;
+    
+    @Autowired
+    ClientStoryRepository clientStoryRepository;
 
     @GetMapping(value = "getListUserClient")
     public List<User> getListCompteClient() {
@@ -118,7 +122,7 @@ public class UserRestController {
             usersStory.setTransactionType("Credit");
             usersStory.setOldBalance(c.getSolde());
             usersStory.setNewBalance(user.getSolde());
-            userStoryRepository.save(usersStory);
+            commercialStoryRepostory.save(usersStory);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
@@ -136,7 +140,19 @@ public class UserRestController {
     public List<CommercialStory> getListStoryClient(@RequestBody User user) {   
         List<CommercialStory> usersStorys=new ArrayList<>();
         try {
-            usersStorys=userStoryRepository.findStoryByIduser(user.getUsername());
+            usersStorys=clientStoryRepository.findStoryByIduser(user.getUsername());
+            return   usersStorys;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+     @PostMapping(value = "getListStoryCommercial")
+    public List<CommercialStory> getListStoryCommercial(@RequestBody User user) {   
+        List<CommercialStory> usersStorys=new ArrayList<>();
+        try {
+            usersStorys=commercialStoryRepostory.findStoryByIduser(user.getUsername());
             return   usersStorys;
         } catch (Exception e) {
             System.out.println(e.getMessage());

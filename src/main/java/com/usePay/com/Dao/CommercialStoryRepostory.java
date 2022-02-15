@@ -18,7 +18,7 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface CommercialStoryRepostory extends JpaRepository<CommercialStory, Integer> {
 
-    @Query(value ="SELECT us FROM UsersStory us WHERE us.user.username=:username")
+    @Query(value ="SELECT us FROM CommercialStory us WHERE us.user.username=:username")
     public List<CommercialStory>findStoryByIduser(@Param(value = "username")String username);
 
     
