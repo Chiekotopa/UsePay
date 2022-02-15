@@ -6,6 +6,7 @@
 package com.usePay.com.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -64,8 +65,7 @@ public class User implements Serializable{
     private Double solde;
     @Column(length = 255, unique = true, name = "numeroCompte")
     private Integer numeroCompte;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
+    private LocalDateTime creationDate;
     @ManyToOne
     @JoinColumn(name = "idAgence", referencedColumnName = "idAgence")
     private Agence agence;
@@ -175,11 +175,11 @@ public class User implements Serializable{
         this.agence = agence;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
     

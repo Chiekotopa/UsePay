@@ -6,7 +6,7 @@
 package com.usePay.com.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -23,13 +21,13 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class UsersStory implements Serializable {
+public class CommercialStory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUserStory;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date transactionDate;
+    
+    private LocalDateTime transactionDate;
     private String transactionType;
     private double transactionBalance;
     private double oldBalance;
@@ -38,22 +36,22 @@ public class UsersStory implements Serializable {
     @JoinColumn(name = "user", referencedColumnName = "username")
     private User user;
 
-    public UsersStory() {
+    public CommercialStory() {
     }
 
-    public Integer getIdclientStory() {
+    public Integer getIdUserStory() {
         return idUserStory;
     }
 
-    public void setIdclientStory(Integer idUserStory) {
+    public void setIdUserStory(Integer idUserStory) {
         this.idUserStory = idUserStory;
     }
 
-    public Date getTransactionDate() {
+    public LocalDateTime getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(LocalDateTime transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -90,13 +88,17 @@ public class UsersStory implements Serializable {
     }
 
     
-    public User getClient() {
+
+    public User getUser() {
         return user;
     }
 
-    public void setClient(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
+
+    
+    
     
 
 }

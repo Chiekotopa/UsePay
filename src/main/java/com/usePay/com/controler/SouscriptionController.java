@@ -5,9 +5,10 @@
  */
 package com.usePay.com.controler;
 
+import com.usePay.com.Dao.ClientStoryRepository;
+import com.usePay.com.dao.CommercialStoryRepostory;
 import com.usePay.com.entities.Souscription;
 import java.util.HashMap;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.usePay.com.dao.SouscriptionRepostory;
+import com.usePay.com.dao.UserRepostory;
+import com.usePay.com.entities.ClientStory;
+
+
+import com.usePay.com.entities.User;
+import com.usePay.com.entities.CommercialStory;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -28,24 +36,72 @@ public class SouscriptionController {
 
     @Autowired
     SouscriptionRepostory souscriptionRepository;
+    
+    @Autowired
+    CommercialStoryRepostory commercialStoryRepostory;
+    
+    @Autowired
+    ClientStoryRepository clientStoryRepository;
+    
+    @Autowired
+    UserRepostory userRepository;
 
     @GetMapping("getSubscriptionList")
-    public List<Souscription> getSubscriptionList() {
+    public Object getSubscriptionList() {
 
         try {
             return souscriptionRepository.findAll();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return null;
+             HashMap map = new HashMap();
+            map.put("status", "0");
+            map.put("message", e.getMessage());
+            return map;
         }
     }
 
     
     @PostMapping("saveSouscription")
-    public HashMap saveSouscription(@RequestBody Souscription souscription) {
+    public Object saveSouscription(@RequestBody Souscription souscription) {
         HashMap map = new HashMap();
+        CommercialStory commercialStory=new CommercialStory();
+        ClientStory clientStory=new ClientStory();
+             
         try {
+            souscription.setDateSouscription(LocalDateTime.now());
+            souscription.setTauxPenalite(0);
+            souscription.setDuree(souscription.getDateDebut()
+                    .plusMonths(souscription.getProduits().getCategoriedesignation()
+                            .getPeriodeVerssement().getPeriodeMax()));
+                       
+            souscription.setMontantJour(souscription.getProduits().getPrix()/(24*souscription.getProduits()
+                    .getCategoriedesignation().getPeriodeVerssement().getPeriodeMax()));
+            
+            souscription.setVersement(souscription.getProduits().getTauxPremierVerssement().getTaux()*souscription.getProduits()
+                    .getPrix());
+            
+            souscription.setMontantDet(souscription.getProduits().getPrix()-souscription.getVersement());
+            
+            
+            User user=userRepository.getById(souscription.getUser().getUserCreator());
+            commercialStory.setUser(souscription.getUser());
+            commercialStory.setTransactionType("Souscription");
+            commercialStory.setTransactionDate(LocalDateTime.now());
+            commercialStory.setNewBalance(souscription.getVersement()+user.getSolde());
+            commercialStory.setOldBalance(user.getSolde());
+            commercialStory.setTransactionBalance(souscription.getVersement());
+            
+            clientStory.setNewDette(souscription.getMontantDet());
+            clientStory.setOldDette(0.0);
+            clientStory.setTransactionDate(LocalDateTime.now());
+            clientStory.setTransactionType("Souscription");
+            clientStory.setVersement(souscription.getVersement());
+            clientStory.setUser(souscription.getUser());
+            
             souscriptionRepository.save(souscription);
+            commercialStoryRepostory.save(commercialStory);
+            clientStoryRepository.save(clientStory);
+            
             map.put("status", "1");
             map.put("message", "Success");
             return map;
@@ -56,5 +112,6 @@ public class SouscriptionController {
             return map;
         }
     }
-
+    
+    
 }

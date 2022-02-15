@@ -23,7 +23,7 @@ public class PeriodeVerssement implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPeriode;
-    private String periodeMax;
+    private int periodeMax;
 
     public PeriodeVerssement() {
     }
@@ -36,11 +36,11 @@ public class PeriodeVerssement implements Serializable{
         this.idPeriode = idPeriode;
     }
 
-    public String getPeriodeMax() {
+    public int getPeriodeMax() {
         return periodeMax;
     }
 
-    public void setPeriodeMax(String periodeMax) {
+    public void setPeriodeMax(int periodeMax) {
         this.periodeMax = periodeMax;
     }
     

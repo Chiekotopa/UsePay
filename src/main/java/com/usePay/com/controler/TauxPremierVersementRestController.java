@@ -7,9 +7,7 @@ package com.usePay.com.controler;
 
 import com.usePay.com.Dao.TauxPremierVersementRepository;
 import com.usePay.com.entities.TauxPremierVerssement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +47,7 @@ public class TauxPremierVersementRestController {
     }
 
     @GetMapping(value = "getListTauxVersement")
-    public Object getListTauxVersement(@RequestBody TauxPremierVerssement premierVerssement) {
+    public Object getListTauxVersement() {
         HashMap map = new HashMap();
         try {
 

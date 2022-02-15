@@ -7,8 +7,8 @@ package com.usePay.com.entities;
 
 import com.usePay.com.Entities.Produits;
 import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Column;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,30 +23,24 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class Souscription implements Serializable{
+public class Souscription implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSouscription;
-    @Column(length = 155,unique = true)
-    private int numero;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateSouscription;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateDebut;
-    @Temporal(TemporalType.DATE)
-    private Date duree;
+    private LocalDateTime dateSouscription;
+    private LocalDate dateDebut;
+    private LocalDate duree;
     private double montantJour;
     private double tauxPenalite;
     private double montantDet;
     private double versement;
     @ManyToOne
-    @JoinColumn(name = "idProduit",referencedColumnName = "idProduit")
+    @JoinColumn(name = "idProduit", referencedColumnName = "idProduit")
     private Produits produits;
     @ManyToOne
-    @JoinColumn(name = "user",referencedColumnName = "username")
+    @JoinColumn(name = "user", referencedColumnName = "username")
     private User user;
-    
 
     public Souscription() {
     }
@@ -77,35 +69,29 @@ public class Souscription implements Serializable{
         this.idSouscription = idSouscription;
     }
 
-    public int getNumero() {
-        return numero;
-    }
+  
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public Date getDateSouscription() {
+    public LocalDateTime getDateSouscription() {
         return dateSouscription;
     }
 
-    public void setDateSouscription(Date dateSouscription) {
+    public void setDateSouscription(LocalDateTime dateSouscription) {
         this.dateSouscription = dateSouscription;
     }
 
-    public Date getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Date dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public Date getDuree() {
+    public LocalDate getDuree() {
         return duree;
     }
 
-    public void setDuree(Date duree) {
+    public void setDuree(LocalDate duree) {
         this.duree = duree;
     }
 
@@ -140,8 +126,5 @@ public class Souscription implements Serializable{
     public void setUser(User user) {
         this.user = user;
     }
-    
-    
-    
 
 }
