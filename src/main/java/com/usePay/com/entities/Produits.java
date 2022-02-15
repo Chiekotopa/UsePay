@@ -26,10 +26,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "produits")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Produits.findAll", query = "SELECT p FROM Produits p"),
-    @NamedQuery(name = "Produits.findById", query = "SELECT p FROM Produits p WHERE p.idProduit = :idProduit")})
 public class Produits implements Serializable {
    private static final long serialVersionUID = 1L;
     @Id
@@ -40,10 +36,7 @@ public class Produits implements Serializable {
     
     @Column(name = "nom")
     private String nom;
-    
-     @Column(name = "photo")
-    private String photo;
-    
+      
     @Column(name = "description")
     private String description;
     
@@ -70,15 +63,6 @@ public class Produits implements Serializable {
         this.tauxPremierVerssement = tauxPremierVerssement;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-    
-    
     
     public Produits(String nom, String prix) {
         this.nom = nom;
