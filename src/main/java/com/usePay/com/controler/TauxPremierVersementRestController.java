@@ -49,7 +49,7 @@ public class TauxPremierVersementRestController {
     }
 
     @GetMapping(value = "getListTauxVersement")
-    public Object getListTauxVersement(@RequestBody TauxPremierVerssement premierVerssement) {
+    public Object getListTauxVersement() {
         HashMap map = new HashMap();
         try {
 

@@ -24,14 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/apiProduit")
 @CrossOrigin(origins = "*")
 public class ProduitControler {
     @Autowired
     ProduitsRepository produitsRepository;
     
     //api qui permet d'enregistrer une liste de produits
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/saveProduits", method = RequestMethod.POST)
     public void saveProduits(@RequestBody Produits produits) {
        produitsRepository.save(produits);   

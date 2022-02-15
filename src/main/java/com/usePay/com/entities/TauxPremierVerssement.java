@@ -23,8 +23,8 @@ public class TauxPremierVerssement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTaux;
-    private Double Taux;
-
+    private Double taux;
+    private String description;
     public TauxPremierVerssement() {
     }
 
@@ -37,11 +37,21 @@ public class TauxPremierVerssement implements Serializable {
     }
 
     public Double getTaux() {
-        return Taux;
+        return taux;
     }
 
-    public void setTaux(Double Taux) {
-        this.Taux = Taux;
+    public void setTaux(Double taux) {
+        this.taux = taux;
+    }
+
+    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     

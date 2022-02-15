@@ -10,6 +10,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,12 +27,27 @@ public class Categorie implements Serializable {
 
     @Id
     @Basic(optional = false)
-    @Column(name = "designation")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idcategorie")
+    private Integer idcategorie;
+   
     private String designation;
     
     @JoinColumn(name = "periode", referencedColumnName = "idPeriode")
     @ManyToOne(optional = false)
     private PeriodeVerssement periodeVerssement;
+    
+    public Categorie() {
+    }
+
+
+    public Integer getIdcategorie() {
+        return idcategorie;
+    }
+
+    public void setIdcategorie(Integer idcategorie) {
+        this.idcategorie = idcategorie;
+    }
 
     public PeriodeVerssement getPeriodeVerssement() {
         return periodeVerssement;
@@ -40,13 +57,6 @@ public class Categorie implements Serializable {
         this.periodeVerssement = periodeVerssement;
     }
 
-    public Categorie() {
-    }
-
-    public Categorie(String designation) {
-        this.designation = designation;
-    }
-
     public String getDesignation() {
         return designation;
     }
@@ -54,10 +64,6 @@ public class Categorie implements Serializable {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
-    
 
-    @Override
-    public String toString() {
-        return "com.example.App.Entities.Anneeacad[ designation=" + designation + " ]";
-    }
+    
 }

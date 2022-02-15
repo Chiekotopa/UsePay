@@ -10,6 +10,7 @@ import com.usePay.com.entities.PeriodeVerssement;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,22 @@ public class PeriodeController {
             
         } catch (Exception e) {
            
+            map.put("status", "0");
+            map.put("message", e.getMessage());
+            return map;
+        }
+    }
+    
+    
+    @GetMapping(value = "getPeriode")
+    public Object getListTauxVersement() {
+        HashMap map = new HashMap();
+        try {
+
+            return verssementRepository.findAll();
+
+        } catch (Exception e) {
+
             map.put("status", "0");
             map.put("message", e.getMessage());
             return map;
