@@ -24,6 +24,7 @@ import com.usePay.com.entities.ClientStory;
 import com.usePay.com.entities.User;
 import com.usePay.com.entities.CommercialStory;
 import java.time.LocalDateTime;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -46,11 +47,11 @@ public class SouscriptionController {
     @Autowired
     UserRepostory userRepository;
 
-    @GetMapping("getSubscriptionList")
-    public Object getSubscriptionList() {
+    @GetMapping("getSubscriptionList/{username}")
+    public Object getSubscriptionList(@PathVariable(value = "username")String username) {
 
         try {
-            return souscriptionRepository.findAll();
+            return souscriptionRepository.findSouscriptionByIduser(username);
         } catch (Exception e) {
             System.out.println(e.getMessage());
              HashMap map = new HashMap();

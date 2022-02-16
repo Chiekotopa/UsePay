@@ -6,7 +6,10 @@
 package com.usePay.com.dao;
 
 import com.usePay.com.entities.Souscription;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -14,4 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SouscriptionRepostory extends JpaRepository<Souscription, Integer> {
     
+    @Query(value ="SELECT s FROM Souscription s WHERE s.user.username=:username")
+    public List<Souscription>findSouscriptionByIduser(@Param(value = "username")String username);
 }
