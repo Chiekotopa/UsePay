@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author MIKE
  */
-public interface CathegorieRepository extends JpaRepository<Categorie, String> {
+public interface CategorieRepository extends JpaRepository<Categorie, Integer> {
     
 }
