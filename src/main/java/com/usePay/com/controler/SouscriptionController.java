@@ -73,7 +73,7 @@ public class SouscriptionController {
                     .plusMonths(souscription.getProduits().getCategorie()
                             .getPeriodeVerssement().getPeriodeMax()));
 
-            souscription.setMontantJour(souscription.getProduits().getPrix() / (24 * souscription.getProduits()
+            souscription.setMontantJour(souscription.getProduits().getPrix() / (26 * souscription.getProduits()
                     .getCategorie().getPeriodeVerssement().getPeriodeMax()));
 
             souscription.setVersement(souscription.getProduits().getTauxPremierVerssement().getTaux() * souscription.getProduits()
