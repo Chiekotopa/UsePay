@@ -12,6 +12,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -27,19 +29,20 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table
-public class User implements Serializable{
+public class User implements Serializable {
 
     @Id
-    @Basic(optional = false)
-    @Column(name = "username")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer iduser;
+    @Column(name = "username", unique = true)
     private String username;
-    
+
     @Column(name = "password")
     private String password;
     @ManyToMany
-    @JoinTable(name="USERS_ROLE")
-    private Collection<Role>roles;
-    
+    @JoinTable(name = "USERS_ROLE")
+    private Collection<Role> roles;
+
     @Column(name = "nom")
     private String nom;
     @Column(name = "prenom")
@@ -73,10 +76,10 @@ public class User implements Serializable{
     private String TypeUser;
     @Column(name = "userCreator")
     private String userCreator;
-    
+
     public User() {
     }
-    
+
     public String getNom() {
         return nom;
     }
@@ -157,8 +160,6 @@ public class User implements Serializable{
         this.status = status;
     }
 
-   
-
     public Integer getNumeroCompte() {
         return numeroCompte;
     }
@@ -182,23 +183,21 @@ public class User implements Serializable{
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
-    
-   
-    
-     public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    
-    public void setPassword(String password){
-        this.password=password;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
-    
-     public String getTypeUser(){
+
+    public String getTypeUser() {
         return TypeUser;
     }
-    
-    public void setTypeUser(String typeUser){
-        this.TypeUser=typeUser;
+
+    public void setTypeUser(String typeUser) {
+        this.TypeUser = typeUser;
     }
 
     public String getUsername() {
@@ -224,16 +223,13 @@ public class User implements Serializable{
     public void setUserCreator(String userCreator) {
         this.userCreator = userCreator;
     }
-    
-    
-    
-    public Collection<Role> getRoles(){
+
+    public Collection<Role> getRoles() {
         return roles;
     }
-    
-    public void setRoles(Collection<Role>roles){
-        this.roles=roles;
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
-   
 
 }

@@ -7,7 +7,6 @@ package com.usePay.com.Entities;
 
 import com.usePay.com.entities.PeriodeVerssement;
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +25,6 @@ import javax.persistence.Table;
 public class Categorie implements Serializable {
 
     @Id
-    @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcategorie")
     private Integer idcategorie;
@@ -61,6 +59,7 @@ public class Categorie implements Serializable {
         return designation;
     }
 
+    
     public void setDesignation(String designation) {
         this.designation = designation;
     }

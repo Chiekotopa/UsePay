@@ -108,20 +108,20 @@ public class UserRestController {
     @PostMapping(value = "creditUSer")
     public Object creditClient(@RequestBody User user) {
         HashMap map = new HashMap();
-        CommercialStory usersStory = new CommercialStory();
+        CommercialStory commercialStory = new CommercialStory();
         User u=new User();
         double sdeCredit = user.getSolde();
         try {
             User c = userRepository.getById(user.getUsername());
             user.setSolde(c.getSolde() + user.getSolde());
             userRepository.save(user);
-            usersStory.setUser(user);
-            usersStory.setTransactionDate(LocalDateTime.now());
-            usersStory.setTransactionBalance(sdeCredit);
-            usersStory.setTransactionType("Credit");
-            usersStory.setOldBalance(c.getSolde());
-            usersStory.setNewBalance(user.getSolde());
-            commercialStoryRepostory.save(usersStory);
+            commercialStory.setUser(user);
+            commercialStory.setTransactionDate(LocalDateTime.now());
+            commercialStory.setTransactionBalance(sdeCredit);
+            commercialStory.setTransactionType("Credit");
+            commercialStory.setOldBalance(c.getSolde());
+            commercialStory.setNewBalance(user.getSolde());
+            commercialStoryRepostory.save(commercialStory);
             map.put("status", "1");
             map.put("message", "Success");
             return map;

@@ -72,11 +72,11 @@ public class SouscriptionController {
             souscription.setDateSouscription(LocalDateTime.now());
             souscription.setTauxPenalite(0);
             souscription.setDuree(souscription.getDateDebut()
-                    .plusMonths(souscription.getProduits().getCategoriedesignation()
+                    .plusMonths(souscription.getProduits().getCategorie()
                             .getPeriodeVerssement().getPeriodeMax()));
                        
             souscription.setMontantJour(souscription.getProduits().getPrix()/(24*souscription.getProduits()
-                    .getCategoriedesignation().getPeriodeVerssement().getPeriodeMax()));
+                    .getCategorie().getPeriodeVerssement().getPeriodeMax()));
             
             souscription.setVersement(souscription.getProduits().getTauxPremierVerssement().getTaux()*souscription.getProduits()
                     .getPrix());
