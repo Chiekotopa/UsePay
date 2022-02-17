@@ -15,10 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -41,11 +38,11 @@ public class Produits implements Serializable {
     private String description;
     
     @Column(name = "prix")
-    private String prix;
+    private Double prix;
     
-    @JoinColumn(name = "categorie_designation", referencedColumnName = "designation")
+    @JoinColumn(name = "categorie", referencedColumnName = "idcategorie")
     @ManyToOne(optional = false)
-    private Categorie categoriedesignation;
+    private Categorie categorie;
     
     @JoinColumn(name = "idTauxVersement", referencedColumnName = "idTaux")
     @ManyToOne(optional = false)
@@ -64,7 +61,7 @@ public class Produits implements Serializable {
     }
 
     
-    public Produits(String nom, String prix) {
+    public Produits(String nom, Double prix) {
         this.nom = nom;
         this.prix = prix;
     }
@@ -77,11 +74,11 @@ public class Produits implements Serializable {
         this.nom = nom;
     }
 
-    public String getPrix() {
+    public Double getPrix() {
         return prix;
     }
 
-    public void setPrix(String prix) {
+    public void setPrix(Double prix) {
         this.prix = prix;
     }
 
@@ -102,14 +99,15 @@ public class Produits implements Serializable {
         this.description = description;
     }
 
-    public Categorie getCategoriedesignation() {
-        return categoriedesignation;
+    public Categorie getCategorie() {
+        return categorie;
     }
 
-    public void setCategoriedesignation(Categorie categoriedesignation) {
-        this.categoriedesignation = categoriedesignation;
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
 
+    
     
     
     
