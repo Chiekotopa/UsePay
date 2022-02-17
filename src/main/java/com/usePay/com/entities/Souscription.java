@@ -35,6 +35,7 @@ public class Souscription implements Serializable {
     private double tauxPenalite;
     private double montantDet;
     private double versement;
+    private double versementJour;
     @ManyToOne
     @JoinColumn(name = "idProduit", referencedColumnName = "idProduit")
     private Produits produits;
@@ -126,5 +127,15 @@ public class Souscription implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public double getVersementJour() {
+        return versementJour;
+    }
+
+    public void setVersementJour(double versementJour) {
+        this.versementJour = versementJour;
+    }
+    
+    
 
 }

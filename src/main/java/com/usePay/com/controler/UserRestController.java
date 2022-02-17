@@ -105,35 +105,7 @@ public class UserRestController {
 
     }
 
-    @PostMapping(value = "creditUSer")
-    public Object creditClient(@RequestBody User user) {
-        HashMap map = new HashMap();
-        CommercialStory commercialStory = new CommercialStory();
-        User u=new User();
-        double sdeCredit = user.getSolde();
-        try {
-            User c = userRepository.getById(user.getUsername());
-            user.setSolde(c.getSolde() + user.getSolde());
-            userRepository.save(user);
-            commercialStory.setUser(user);
-            commercialStory.setTransactionDate(LocalDateTime.now());
-            commercialStory.setTransactionBalance(sdeCredit);
-            commercialStory.setTransactionType("Credit");
-            commercialStory.setOldBalance(c.getSolde());
-            commercialStory.setNewBalance(user.getSolde());
-            commercialStoryRepostory.save(commercialStory);
-            map.put("status", "1");
-            map.put("message", "Success");
-            return map;
-        } catch (Exception e) {
-            map = new HashMap();
-            map.put("status", "0");
-            map.put("message", e.getMessage());
-            return map;
-
-        }
-
-    }
+    
 
     @PostMapping(value = "getListStoryClient")
     public List<CommercialStory> getListStoryClient(@RequestBody User user) {   
