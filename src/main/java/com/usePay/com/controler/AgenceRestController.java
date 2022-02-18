@@ -30,14 +30,24 @@ public class AgenceRestController {
     AgenceRepostory agenceRepository;
 
     @GetMapping(value = "getlistAgences")
-    public List<Agence> getlistAgents() {
-
+    public Object getlistAgents() {
+        HashMap map = new HashMap();
+        try {
         return agenceRepository.findAll();
+           
+        } catch (Exception e) {
+            map = new HashMap();
+            map.put("status", "0");
+            map.put("message", e.getMessage());
+            e.printStackTrace();
+            return map;
+
+        }
 
     }
 
     @PostMapping(value = "saveAgence")
-    public HashMap saveAgent(@RequestBody Agence agence) {
+    public Object saveAgent(@RequestBody Agence agence) {
         HashMap map = new HashMap();
         try {
 
@@ -49,6 +59,7 @@ public class AgenceRestController {
             map = new HashMap();
             map.put("status", "0");
             map.put("message", e.getMessage());
+            e.printStackTrace();
             return map;
 
         }

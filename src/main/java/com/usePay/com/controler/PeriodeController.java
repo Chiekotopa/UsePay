@@ -24,29 +24,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/apiPeriode")
 @CrossOrigin(origins = "*")
 public class PeriodeController {
-   
+
     @Autowired
     PeriodeVerssementRepository verssementRepository;
-    
+
     @PostMapping(value = "SavePeriode")
-    public Object SavePeriode(@RequestBody PeriodeVerssement periodeVerssement){
-        HashMap map=new HashMap();
-        
+    public Object SavePeriode(@RequestBody PeriodeVerssement periodeVerssement) {
+        HashMap map = new HashMap();
+
         try {
             verssementRepository.save(periodeVerssement);
             map.put("status", "1");
             map.put("message", "Success");
             return map;
-            
+
         } catch (Exception e) {
-           
+            e.printStackTrace();
             map.put("status", "0");
             map.put("message", e.getMessage());
             return map;
         }
     }
-    
-    
+
     @GetMapping(value = "getPeriode")
     public Object getListTauxVersement() {
         HashMap map = new HashMap();
@@ -55,11 +54,11 @@ public class PeriodeController {
             return verssementRepository.findAll();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
             map.put("status", "0");
             map.put("message", e.getMessage());
             return map;
         }
     }
-    
+
 }

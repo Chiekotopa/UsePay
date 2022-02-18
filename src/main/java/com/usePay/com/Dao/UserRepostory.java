@@ -5,7 +5,6 @@
  */
 package com.usePay.com.dao;
 
-import com.usePay.com.entities.Souscription;
 import com.usePay.com.entities.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

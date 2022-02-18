@@ -57,6 +57,7 @@ public class Galery implements Serializable{
     public void setProduit(Produits produit) {
         this.produit = produit;
     }
+
     
     
 }

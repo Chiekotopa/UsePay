@@ -7,11 +7,15 @@ package com.usePay.com.Dao;
 
 import com.usePay.com.Entities.Produits;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author MIKE
  */
-public interface ProduitsRepository extends JpaRepository<Produits, String>{
+public interface ProduitsRepository extends JpaRepository<Produits, Integer>{
     
+     @Query(value ="SELECT p FROM Produits p WHERE p.nom=:name")
+    public  Produits findByNameProduit(@Param(value = "name")String name);
 }

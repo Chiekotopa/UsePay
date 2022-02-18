@@ -56,6 +56,8 @@ public class SouscriptionController {
             HashMap map = new HashMap();
             map.put("status", "0");
             map.put("message", e.getMessage());
+            e.printStackTrace();
+
             return map;
         }
     }
@@ -107,6 +109,8 @@ public class SouscriptionController {
             map = new HashMap();
             map.put("status", "0");
             map.put("message", e.getMessage());
+            e.printStackTrace();
+
             return map;
         }
     }
@@ -149,6 +153,8 @@ public class SouscriptionController {
             map = new HashMap();
             map.put("status", "0");
             map.put("message", e.getMessage());
+            e.printStackTrace();
+
             return map;
 
         }

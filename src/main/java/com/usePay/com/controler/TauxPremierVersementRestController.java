@@ -42,6 +42,8 @@ public class TauxPremierVersementRestController {
 
             map.put("status", "0");
             map.put("message", e.getMessage());
+            e.printStackTrace();
+
             return map;
         }
     }
@@ -57,6 +59,8 @@ public class TauxPremierVersementRestController {
 
             map.put("status", "0");
             map.put("message", e.getMessage());
+            e.printStackTrace();
+
             return map;
         }
     }
