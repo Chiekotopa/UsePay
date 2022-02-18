@@ -5,6 +5,7 @@
  */
 package com.usePay.com.Entities;
 
+import com.usePay.com.entities.Galery;
 import com.usePay.com.entities.TauxPremierVerssement;
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -31,7 +32,7 @@ public class Produits implements Serializable {
     @Column(name = "idProduit")
     private Integer idProduit;
     
-    @Column(name = "nom")
+    @Column(name = "nom",unique = true)
     private String nom;
       
     @Column(name = "description")
@@ -47,6 +48,8 @@ public class Produits implements Serializable {
     @JoinColumn(name = "idTauxVersement", referencedColumnName = "idTaux")
     @ManyToOne(optional = false)
     private TauxPremierVerssement tauxPremierVerssement;
+    
+    
     
     public Produits(){
         
@@ -106,6 +109,8 @@ public class Produits implements Serializable {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+
+    
 
     
     
