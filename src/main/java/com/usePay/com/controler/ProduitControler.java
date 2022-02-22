@@ -42,7 +42,7 @@ public class ProduitControler {
     }
     
     //api qui supprime un produits
-    @RequestMapping(value = "/deleteProduits", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteProduits", method = RequestMethod.DELETE)
         public void deleteActualite(@RequestBody Produits produits ) {
         produitsRepository.delete(produits);
     }

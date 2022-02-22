@@ -7,8 +7,10 @@ package com.usePay.com.controler;
 
 import com.usePay.com.Dao.GaleryRepository;
 import com.usePay.com.Dao.ProduitsRepository;
-import com.usePay.com.Entities.Produits;
 import com.usePay.com.entities.Galery;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +20,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -129,14 +131,13 @@ public class GaleryController {
 //
 //        }
 //
-//    }
 
-    @PostMapping(value = "deleteGalery")
+    @DeleteMapping(value = "deleteGalery")
     public Object SavePeriode(@RequestBody Galery galery) {
         HashMap map = new HashMap();
         
         try {
-            galery=galeryRepository.getById(galery.getIdPhoto());
+            galery=galeryRepository.getOne(galery.getIdPhoto());
             File file=new File(galery.getPhoto());
             boolean bol=file.delete();           
             galeryRepository.delete(galery);
