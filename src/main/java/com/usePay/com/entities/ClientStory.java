@@ -33,7 +33,7 @@ public class ClientStory implements Serializable{
     private double oldDette;
     private double newDette;
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "username")
+    @JoinColumn(name = "user", referencedColumnName = "iduser")
     private User user;
 
     public ClientStory() {

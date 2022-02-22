@@ -40,7 +40,7 @@ public class Souscription implements Serializable {
     @JoinColumn(name = "idProduit", referencedColumnName = "idProduit")
     private Produits produits;
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "username")
+    @JoinColumn(name = "user", referencedColumnName = "iduser")
     private User user;
 
     public Souscription() {

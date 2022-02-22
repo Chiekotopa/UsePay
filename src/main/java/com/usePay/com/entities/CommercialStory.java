@@ -33,7 +33,7 @@ public class CommercialStory implements Serializable {
     private double oldBalance;
     private double newBalance;
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "username")
+    @JoinColumn(name = "user", referencedColumnName = "iduser")
     private User user;
 
     public CommercialStory() {

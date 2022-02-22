@@ -231,4 +231,14 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
+    public Integer getIduser() {
+        return iduser;
+    }
+
+    public void setIduser(Integer iduser) {
+        this.iduser = iduser;
+    }
+    
+    
+
 }

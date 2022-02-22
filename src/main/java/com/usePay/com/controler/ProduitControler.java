@@ -30,6 +30,8 @@ public class ProduitControler {
     //api qui permet d'enregistrer une liste de produits
     @RequestMapping(value = "/saveProduits", method = RequestMethod.POST)
     public void saveProduits(@RequestBody Produits produits) {
+        
+        
        produitsRepository.save(produits);   
     }
     
