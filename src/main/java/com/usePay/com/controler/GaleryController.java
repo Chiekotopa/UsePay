@@ -8,31 +8,15 @@ package com.usePay.com.controler;
 import com.usePay.com.Dao.GaleryRepository;
 import com.usePay.com.Dao.ProduitsRepository;
 import com.usePay.com.entities.Galery;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import static java.nio.file.Paths.get;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author chiek
- */
 @RestController
 @RequestMapping("/apiGalery")
 @CrossOrigin(origins = "*")
@@ -43,103 +27,25 @@ public class GaleryController {
 
     @Autowired
     ProduitsRepository produitsRepository;
+   public static String DIRECTORY = System.getProperty("user.home") + "\\Documents\\UseAndPay\\Galery";
 
-    String DIRECTORY = System.getProperty("user.home") + "\\Documents\\UseAndPay\\Galery";
-
-    @PostMapping(value = "saveGalery/{produitName}")
-    public Object SaveGalery(@RequestParam(value = "file") MultipartFile imageFile, @PathVariable(value = "produitName") String produitName) {
-        HashMap map = new HashMap();
-        Galery galery = new Galery();
-        new File(DIRECTORY).mkdirs();
-
-        if (!imageFile.isEmpty()) {
-            try {
-
-                String filename = StringUtils.cleanPath(imageFile.getOriginalFilename());
-                String extention = " ";
-                int i = filename.lastIndexOf('.');
-                if (i > 0) {
-                    extention = filename.substring(i + 1);
-                   extention= extention.toLowerCase();
-                    System.out.println(extention);
-                }
-                if (extention.equals("jpg") || extention.equals("png") || extention.equals("jpeg")) {
-                    Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-                    System.out.println(DIRECTORY);
-                    Files.copy(imageFile.getInputStream(), fileStorage, StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println(fileStorage + " " + filename + " " + imageFile.getInputStream());
-
-                    galery.setPhoto(fileStorage.toString());
-                    galeryRepository.save(galery);
-                    map.put("status", "1");
-                    map.put("message", "Success");
-                    return map;
-                } else {
-                    map.put("status", "-1");
-                    map.put("message","extension is not valide");                
-                    return map;
-                }
-
-            } catch (Exception e) {
-
-                map.put("status", "0");
-                map.put("message", e.getMessage());
-                e.printStackTrace();
-                return map;
-            }
-        } else {
-            map.put("status", "-1");
-            map.put("message", "fichier vide!");
-            return map;
-
-        }
-
-    }
-
-//    @GetMapping(value = "GetGalery")
-//    public Object GetGalery(@RequestParam(value = "file") MultipartFile imageFile) {
-//        HashMap map = new HashMap();
-//        Galery galery = new Galery();
-//        new File(DIRECTORY).mkdirs();
-//
-//        if (!imageFile.isEmpty()) {
-//            try {
-//
-//                String filename = StringUtils.cleanPath(imageFile.getOriginalFilename());
-//                Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-//                System.out.println(DIRECTORY);
-//                Files.copy(imageFile.getInputStream(), fileStorage, StandardCopyOption.REPLACE_EXISTING);
-//                System.out.println(fileStorage + " " + filename + " " + imageFile.getInputStream());
-//               
-//                galery.setPhoto(fileStorage.toString());
-//                galeryRepository.save(galery);
-//                map.put("status", "1");
-//                map.put("message", "Success");
-//                return map;
-//
-//            } catch (Exception e) {
-//
-//                map.put("status", "0");
-//                map.put("message", e.getMessage());
-//                e.printStackTrace();
-//                return map;
-//            }
-//        } else {
-//            map.put("status", "0");
-//            map.put("message", "fichier vide!");
-//            return map;
-//
-//        }
-//
-
+//    @GetMapping("getGalery")
+//    public Object downloadFile() {
+//        Galery galery = galeryRepository.getOne(2);
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.parseMediaType(galery.getTypeFile()))
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + galery.getFileName() + "\"")
+//                .body(new ByteArrayResource(galery.getPhoto()));
+//    }
+   
     @DeleteMapping(value = "deleteGalery")
-    public Object SavePeriode(@RequestBody Galery galery) {
+    public Object deleteGalery(@RequestBody Galery galery) {
         HashMap map = new HashMap();
-        
+
         try {
-            galery=galeryRepository.getOne(galery.getIdPhoto());
-            File file=new File(galery.getPhoto());
-            boolean bol=file.delete();           
+            galery = galeryRepository.getOne(galery.getIdPhoto());
+            File file = new File(DIRECTORY+"\\"+galery.getFileName());
+            file.delete();
             galeryRepository.delete(galery);
             map.put("status", "1");
             map.put("message", "Success");
@@ -149,8 +55,9 @@ public class GaleryController {
             e.printStackTrace();
             map.put("status", "0");
             map.put("message", e.getMessage());
-            
+
             return map;
         }
     }
+
 }

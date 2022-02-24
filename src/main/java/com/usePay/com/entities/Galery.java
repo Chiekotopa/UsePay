@@ -6,14 +6,12 @@
 package com.usePay.com.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -27,8 +25,12 @@ public class Galery implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPhoto;
-    @Column(unique = true)
-    private String photo;
+    @Lob
+    private byte[] photo;
+    @Column(unique = true,length = 100)
+    private String fileName;
+    
+    private String typeFile;
    
 
     public Galery() {
@@ -41,13 +43,31 @@ public class Galery implements Serializable{
     public void setIdPhoto(Integer idPhoto) {
         this.idPhoto = idPhoto;
     }
-
-    public String getPhoto() {
+   
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+    
+    
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getTypeFile() {
+        return typeFile;
+    }
+
+    public void setTypeFile(String typeFile) {
+        this.typeFile = typeFile;
     }
 
    
