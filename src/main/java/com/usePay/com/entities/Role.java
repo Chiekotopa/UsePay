@@ -6,6 +6,7 @@
 package com.usePay.com.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,6 +20,9 @@ import javax.persistence.Table;
 public class Role implements Serializable {
     @Id
     private String role;
+    
+    @Column
+    private String description;
 
     public Role() {
     }
@@ -30,6 +34,15 @@ public class Role implements Serializable {
     public void setRole(String roles) {
         this.role = roles;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     
     
     

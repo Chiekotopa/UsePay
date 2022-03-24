@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class Users implements Serializable {
     @Column(name = "password")
     private String password;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="USERS_ROLES")
     private Collection<Role> roles=new ArrayList<>();
 
@@ -220,9 +221,11 @@ public class Users implements Serializable {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> role) {
+        this.roles = role;
     }
+
+    
 
     public Integer getIduser() {
         return iduser;

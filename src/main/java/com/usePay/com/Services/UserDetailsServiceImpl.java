@@ -39,6 +39,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("***************************");
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
+        for (GrantedAuthority authority : authorities) {
+            System.out.println(authority.getAuthority()+"555555555");
+        }
         System.out.println("***************************");
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
