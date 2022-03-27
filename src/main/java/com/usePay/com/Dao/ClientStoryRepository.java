@@ -19,5 +19,5 @@ import org.springframework.data.repository.query.Param;
 public interface ClientStoryRepository extends JpaRepository<ClientStory, Integer> {
     
     @Query(value ="SELECT cs FROM ClientStory cs WHERE cs.user.username=:username")
-    public List<CommercialStory>findStoryByIduser(@Param(value = "username")String username);
+    public List<ClientStory>findStoryByIduser(@Param(value = "username")String username);
 }

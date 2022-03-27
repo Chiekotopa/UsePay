@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import com.usePay.com.dao.UserRepostory;
 import java.time.LocalDateTime;
 import com.usePay.com.dao.CommercialStoryRepostory;
+import com.usePay.com.entities.ClientStory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -112,8 +113,8 @@ public class UserRestController {
     }
 
     @PostMapping(value = "getListStoryClient")
-    public List<CommercialStory> getListStoryClient(@RequestBody Users user) {
-        List<CommercialStory> usersStorys = new ArrayList<>();
+    public List<ClientStory> getListStoryClient(@RequestBody Users user) {
+        List<ClientStory> usersStorys = new ArrayList<>();
         try {
             usersStorys = clientStoryRepository.findStoryByIduser(user.getUsername());
             return usersStorys;
